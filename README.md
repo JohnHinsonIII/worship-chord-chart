@@ -1,6 +1,6 @@
 # 🎹 Worship Chord Chart V17 - Advanced Educational Edition
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge)](https://yourusername.github.io/worship-chord-chart-v17)
+[![Live Demo](https://johnhhinsoniii.github.io/worship-chord-chart)](https://johnhhinsoniii.github.io/worship-chord-chart)
 [![Version](https://img.shields.io/badge/Version-17-blue?style=flat-square)](https://github.com/yourusername/worship-chord-chart-v17)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
