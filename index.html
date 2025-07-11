@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worship Chord Chart V2 - Dynamic Progression Builder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1f2937;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: clamp(8px, 2vw, 16px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: clamp(1.2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .pattern-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(6px, 1.5vw, 12px);
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .pattern {
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            color: white;
+            padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 16px);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .progression-display {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 24px);
+            margin-bottom: clamp(16px, 3vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .current-key {
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .chord-progression {
+            display: grid;
+            gap: clamp(8px, 2vw, 12px);
+            margin-bottom: 20px;
+        }
+
+        /* Responsive grid layouts */
+        @media (max-width: 480px) {
+            .chord-progression {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .chord-progression {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .chord-progression {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .chord-progression {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        .chord-box {
+            background: linear-gradient(145deg, #f59e0b, #d97706);
+            border: 2px solid #b45309;
+            border-radius: 10px;
+            padding: clamp(10px, 2.5vw, 16px);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: clamp(100px, 20vw, 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            min-height: 44px;
+        }
+
+        .chord-box:hover {
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .chord-box.selected {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            color: white;
+            border-color: #374151;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(31, 41, 55, 0.6);
+        }
+
+        .chord-box.in-progression {
+            background: linear-gradient(145deg, #10b981, #059669);
+            border-color: #047857;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .chord-position {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 2px 6px;
+        }
+
+        .chord-name {
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .roman-numeral {
+            font-size: clamp(0.6rem, 1.8vw, 0.9rem);
+            font-family: 'Courier New', monospace;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4px;
+        }
+
+        .chord-type {
+            font-size: clamp(0.5rem, 1.4vw, 0.8rem);
+            font-family: 'Courier New', monospace;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            padding: 2px 4px;
+        }
+
+        .progression-controls {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 24px);
+            margin-bottom: clamp(16px, 3vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .controls-title {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: linear-gradient(145deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .control-btn.danger {
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+        }
+
+        .control-btn.danger:hover {
+            background: linear-gradient(145deg, #f87171, #ef4444);
+        }
+
+        .dynamic-progression {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: clamp(16px, 3vw, 24px);
+        }
+
+        .progression-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .progression-title {
+            font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .progression-subtitle {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            color: #6b7280;
+        }
+
+        .progression-sequence {
+            margin-bottom: 25px;
+        }
+
+        .sequence-chords {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 16px);
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .sequence-chord {
+            background: linear-gradient(145deg, #10b981, #059669);
+            color: white;
+            padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sequence-chord:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+
+        .sequence-chord .remove-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sequence-chord:hover .remove-btn {
+            display: flex;
+        }
+
+        .progression-keyboards {
+            display: grid;
+            gap: clamp(16px, 3vw, 24px);
+        }
+
+        .keyboard-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: clamp(12px, 3vw, 20px);
+            border: 2px solid #e2e8f0;
+        }
+
+        .keyboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .keyboard-chord-name {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .keyboard-chord-info {
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+            color: #6b7280;
+            font-family: 'Courier New', monospace;
+        }
+
+        .piano-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .piano-keyboard {
+            position: relative;
+            display: inline-flex;
+            transform: scale(clamp(0.4, 0.8vw, 0.9));
+            transform-origin: center;
+            min-width: 500px;
+        }
+
+        .white-keys {
+            display: flex;
+        }
+
+        .white-key {
+            width: 24px;
+            height: 80px;
+            border: 2px solid #d1d5db;
+            background-color: white;
+            margin-right: 1px;
+            border-radius: 0 0 4px 4px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .white-key.left-hand {
+            background: linear-gradient(180deg, #60a5fa, #3b82f6);
+            border-color: #1d4ed8;
+            box-shadow: inset 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+
+        .white-key.right-hand {
+            background: linear-gradient(180deg, #f87171, #ef4444);
+            border-color: #dc2626;
+            box-shadow: inset 0 2px 4px rgba(239, 68, 68, 0.3);
+        }
+
+        .white-key.both-hands {
+            background: linear-gradient(180deg, #a78bfa, #8b5cf6);
+            border-color: #7c3aed;
+            box-shadow: inset 0 2px 4px rgba(139, 92, 246, 0.3);
+        }
+
+        .black-keys {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .black-key {
+            position: absolute;
+            width: 16px;
+            height: 50px;
+            background: linear-gradient(180deg, #374151, #1f2937);
+            border: 1px solid #111827;
+            border-radius: 0 0 3px 3px;
+            transition: all 0.2s ease;
+        }
+
+        .black-key.left-hand {
+            background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            border-color: #1e40af;
+        }
+
+        .black-key.right-hand {
+            background: linear-gradient(180deg, #ef4444, #dc2626);
+            border-color: #b91c1c;
+        }
+
+        .black-key.both-hands {
+            background: linear-gradient(180deg, #8b5cf6, #7c3aed);
+            border-color: #6d28d9;
+        }
+
+        .key-label {
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .white-key.left-hand .key-label,
+        .white-key.right-hand .key-label,
+        .white-key.both-hands .key-label {
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+
+        .fingering-info {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.7rem, 1.8vw, 1rem);
+            color: #374151;
+            background: white;
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 8px;
+            border: 2px solid #10b981;
+        }
+
+        .detail-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: clamp(16px, 3vw, 24px);
+        }
+
+        .detail-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .selected-chord-name {
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .chord-info {
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .detail-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(16px, 4vw, 24px);
+            align-items: start;
+        }
+
+        @media (min-width: 769px) {
+            .detail-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .piano-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: clamp(12px, 3vw, 20px);
+        }
+
+        .section-title {
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .chord-details {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: clamp(16px, 4vw, 24px);
+            margin: 20px 0;
+        }
+
+        .chord-details h4 {
+            color: #92400e;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .chord-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: clamp(10px, 2.5vw, 16px);
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: clamp(10px, 2.5vw, 14px);
+            border-radius: 8px;
+            border: 1px solid #f59e0b;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: #92400e;
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #1f2937;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+        }
+
+        .legend {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: clamp(12px, 3vw, 20px);
+            border-radius: 15px;
+            margin-top: clamp(16px, 3vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .legend-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1f2937;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            text-align: center;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: clamp(8px, 2vw, 12px);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+        }
+
+        .color-box {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 2px solid #d1d5db;
+            flex-shrink: 0;
+        }
+
+        .color-blue { background: linear-gradient(45deg, #60a5fa, #3b82f6); }
+        .color-red { background: linear-gradient(45deg, #f87171, #ef4444); }
+        .color-purple { background: linear-gradient(45deg, #a78bfa, #8b5cf6); }
+        .color-orange { background: linear-gradient(45deg, #fbbf24, #f59e0b); }
+        .color-green { background: linear-gradient(45deg, #34d399, #10b981); }
+
+        .empty-state {
+            text-align: center;
+            padding: clamp(32px, 8vw, 64px);
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .empty-state-icon {
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .chord-box {
+                min-height: 48px;
+            }
+
+            .chord-box:hover {
+                transform: none;
+            }
+
+            .chord-box:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .pattern-row {
+                gap: 4px;
+            }
+
+            .pattern {
+                padding: 4px 8px;
+                min-width: 35px;
+            }
+
+            .piano-keyboard {
+                transform: scale(0.35);
+                min-width: 400px;
+            }
+
+            .progression-keyboards {
+                gap: 12px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .piano-keyboard {
+                transform: scale(0.5);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .piano-keyboard {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Keyboard Accompaniment Flow #1</h1>
+            <p class="subtitle">Worship Music Chord Progressions - Dynamic Builder</p>
+            <div class="pattern-row">
+                <span class="pattern">1</span>
+                <span class="pattern">2m</span>
+                <span class="pattern">1/3</span>
+                <span class="pattern">4</span>
+                <span class="pattern">5</span>
+                <span class="pattern">6m</span>
+                <span class="pattern">5/7</span>
+                <span class="pattern">1</span>
+            </div>
+        </div>
+
+        <div class="progression-display">
+            <div class="current-key">C Major - 8 Position Chord Progression</div>
+            <div class="chord-progression" id="chordProgression"></div>
+        </div>
+
+        <div class="progression-controls">
+            <div class="controls-header">
+                <h3 class="controls-title">🎵 Dynamic Progression Builder</h3>
+                <div class="control-buttons">
+                    <button class="control-btn" onclick="playProgression()">▶️ Play Sequence</button>
+                    <button class="control-btn danger" onclick="clearProgression()">🗑️ Clear All</button>
+                </div>
+            </div>
+            <p style="color: #6b7280; font-size: clamp(0.7rem, 1.8vw, 0.9rem); text-align: center;">
+                Click chord boxes above to build your custom progression. Each chord will show its keyboard below.
+            </p>
+        </div>
+
+        <div class="dynamic-progression" id="dynamicProgression">
+            <div class="progression-header">
+                <h2 class="progression-title">Your Custom Progression</h2>
+                <p class="progression-subtitle">Piano keyboards for each selected chord</p>
+            </div>
+
+            <div class="progression-sequence" id="progressionSequence">
+                <div class="sequence-chords" id="sequenceChords"></div>
+            </div>
+
+            <div class="progression-keyboards" id="progressionKeyboards">
+                <div class="empty-state">
+                    <div class="empty-state-icon">🎹</div>
+                    <p>Select chords above to build your progression<br>Each chord will appear here with its piano keyboard</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-panel">
+            <div class="detail-header">
+                <div class="selected-chord-name" id="selectedChordName">Select a chord above</div>
+                <div class="chord-info" id="chordInfo">Click on any chord to see detailed piano fingerings and chord information</div>
+            </div>
+            <div class="detail-content" id="detailContent" style="display: none;">
+                <div class="piano-section">
+                    <h4 class="section-title">🎹 Piano Keyboard</h4>
+                    <div class="piano-container" id="pianoContainer"></div>
+                    <div class="fingering-info" id="fingeringInfo"></div>
+                    <div class="chord-details" id="chordDetails"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-title">Color Guide & Reference</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="color-box color-blue"></div>
+                    <span>Left Hand</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box color-red"></div>
+                    <span>Right Hand</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box color-purple"></div>
+                    <span>Both Hands</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box color-orange"></div>
+                    <span>Selected</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box color-green"></div>
+                    <span>In Progression</span>
+                </div>
+            </div>
+            <p style="margin-top: 15px; font-style: italic; color: #6b7280; text-align: center; font-size: clamp(0.7rem, 1.8vw, 1rem);">
+                Keyboard accompaniment flow for worship music with dynamic progression builder. Build custom chord sequences and see all piano keyboards together.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Chord progression data based on the requirements table
+        const chordProgression = [
+            {
+                position: 'I',
+                chord: 'C',
+                roman: 'I',
+                shortName: 'C',
+                type: 'Major',
+                formula: '1.3.5',
+                leftHand: ['C3'],
+                rightHand: ['C4', 'E4', 'G4'],
+                description: 'Major triad - tonic chord'
+            },
+            {
+                position: 'ii',
+                chord: 'C4/D',
+                roman: 'ii',
+                shortName: 'C4/D',
+                type: 'Minor11',
+                formula: '1.4.5',
+                leftHand: ['D3'],
+                rightHand: ['C4', 'F4', 'G4'],
+                description: 'Minor with 11th - subdominant preparation'
+            },
+            {
+                position: 'iii',
+                chord: 'C/E',
+                roman: 'I/3',
+                shortName: 'C/E',
+                type: 'Major',
+                formula: '1.3.5',
+                leftHand: ['E3'],
+                rightHand: ['C4', 'E4', 'G4'],
+                description: 'Major triad with 3rd in bass'
+            },
+            {
+                position: 'IV',
+                chord: 'C4/F',
+                roman: 'IV',
+                shortName: 'C4/F',
+                type: 'SUS2',
+                formula: '1.4.5',
+                leftHand: ['F3'],
+                rightHand: ['C4', 'F4', 'G4'],
+                description: 'Suspended 2nd - subdominant'
+            },
+            {
+                position: 'V',
+                chord: 'C2/G',
+                roman: 'V',
+                shortName: 'C2/G',
+                type: 'SUS4',
+                formula: '1.2.5',
+                leftHand: ['G3'],
+                rightHand: ['C4', 'D4', 'G4'],
+                description: 'Suspended 4th - dominant'
+            },
+            {
+                position: 'vi',
+                chord: 'C/Am',
+                roman: 'vi',
+                shortName: 'C/Am',
+                type: 'Minor7',
+                formula: '1.3.5',
+                leftHand: ['A3'],
+                rightHand: ['C4', 'E4', 'G4'],
+                description: 'Minor 7th - relative minor'
+            },
+            {
+                position: 'VII',
+                chord: 'G/B',
+                roman: 'V/7',
+                shortName: 'G/B',
+                type: 'Add11/7th',
+                formula: '1.2.5',
+                leftHand: ['B3'],
+                rightHand: ['C4', 'D4', 'G4'],
+                description: 'Add 11th with 7th in bass'
+            },
+            {
+                position: 'VIII',
+                chord: 'C',
+                roman: 'I',
+                shortName: 'C',
+                type: 'Major',
+                formula: '1.3.5',
+                leftHand: ['C3'],
+                rightHand: ['C4', 'E4', 'G4'],
+                description: 'Major triad - resolution to tonic'
+            }
+        ];
+
+        // Note to piano key mapping (C4 = middle C = key index 0)
+        const noteToKey = {
+            'C3': -12, 'C#3': -11, 'Db3': -11, 'D3': -10, 'D#3': -9, 'Eb3': -9, 'E3': -8, 'F3': -7, 'F#3': -6, 'Gb3': -6,
+            'G3': -5, 'G#3': -4, 'Ab3': -4, 'A3': -3, 'A#3': -2, 'Bb3': -2, 'B3': -1,
+            'C4': 0, 'C#4': 1, 'Db4': 1, 'D4': 2, 'D#4': 3, 'Eb4': 3, 'E4': 4, 'F4': 5, 'F#4': 6, 'Gb4': 6,
+            'G4': 7, 'G#4': 8, 'Ab4': 8, 'A4': 9, 'A#4': 10, 'Bb4': 10, 'B4': 11,
+            'C5': 12, 'C#5': 13, 'Db5': 13, 'D5': 14, 'D#5': 15, 'Eb5': 15, 'E5': 16, 'F5': 17, 'F#5': 18, 'Gb5': 18,
+            'G5': 19, 'G#5': 20, 'Ab5': 20, 'A5': 21, 'A#5': 22, 'Bb5': 22, 'B5': 23, 'C6': 24
+        };
+
+        let selectedChord = null;
+        let customProgression = [];
+
+        function isBlackKey(keyIndex) {
+            const blackKeys = [-11, -9, -6, -4, -2, 1, 3, 6, 8, 10, 13, 15, 18, 20, 22];
+            return blackKeys.includes(keyIndex);
+        }
+
+        function getNoteNameFromIndex(keyIndex) {
+            const noteNames = {
+                '-12': 'C', '-11': 'C#', '-10': 'D', '-9': 'D#', '-8': 'E', '-7': 'F', '-6': 'F#', 
+                '-5': 'G', '-4': 'G#', '-3': 'A', '-2': 'A#', '-1': 'B',
+                '0': 'C', '1': 'C#', '2': 'D', '3': 'D#', '4': 'E', '5': 'F', '6': 'F#', 
+                '7': 'G', '8': 'G#', '9': 'A', '10': 'A#', '11': 'B',
+                '12': 'C', '13': 'C#', '14': 'D', '15': 'D#', '16': 'E', '17': 'F', '18': 'F#', 
+                '19': 'G', '20': 'G#', '21': 'A', '22': 'A#', '23': 'B', '24': 'C'
+            };
+            return noteNames[keyIndex] || '';
+        }
+
+        function createPianoKeyboard(leftHandNotes = [], rightHandNotes = []) {
+            const leftPressedKeys = new Set();
+            const rightPressedKeys = new Set();
+            
+            leftHandNotes.forEach(note => {
+                if (noteToKey[note] !== undefined) {
+                    leftPressedKeys.add(noteToKey[note]);
+                }
+            });
+            
+            rightHandNotes.forEach(note => {
+                if (noteToKey[note] !== undefined) {
+                    rightPressedKeys.add(noteToKey[note]);
+                }
+            });
+
+            const keyboard = document.createElement('div');
+            keyboard.className = 'piano-keyboard';
+            
+            const whiteKeysContainer = document.createElement('div');
+            whiteKeysContainer.className = 'white-keys';
+            
+            const blackKeysContainer = document.createElement('div');
+            blackKeysContainer.className = 'black-keys';
+
+            let whiteKeyIndex = 0;
+            for (let i = -12; i < 25; i++) {
+                const isLeftPressed = leftPressedKeys.has(i);
+                const isRightPressed = rightPressedKeys.has(i);
+                
+                if (isBlackKey(i)) {
+                    const blackKey = document.createElement('div');
+                    blackKey.className = 'black-key';
+                    
+                    if (isLeftPressed && isRightPressed) {
+                        blackKey.classList.add('both-hands');
+                    } else if (isLeftPressed) {
+                        blackKey.classList.add('left-hand');
+                    } else if (isRightPressed) {
+                        blackKey.classList.add('right-hand');
+                    }
+                    
+                    blackKey.style.left = (whiteKeyIndex * 25 - 8) + 'px';
+                    blackKeysContainer.appendChild(blackKey);
+                } else {
+                    const whiteKey = document.createElement('div');
+                    whiteKey.className = 'white-key';
+                    
+                    if (isLeftPressed && isRightPressed) {
+                        whiteKey.classList.add('both-hands');
+                    } else if (isLeftPressed) {
+                        whiteKey.classList.add('left-hand');
+                    } else if (isRightPressed) {
+                        whiteKey.classList.add('right-hand');
+                    }
+
+                    // Add note label
+                    const label = document.createElement('span');
+                    label.className = 'key-label';
+                    label.textContent = getNoteNameFromIndex(i);
+                    whiteKey.appendChild(label);
+                    
+                    whiteKeysContainer.appendChild(whiteKey);
+                    whiteKeyIndex++;
+                }
+            }
+
+            keyboard.appendChild(whiteKeysContainer);
+            keyboard.appendChild(blackKeysContainer);
+            
+            return keyboard;
+        }
+
+        function initializeChordProgression() {
+            const progressionContainer = document.getElementById('chordProgression');
+            
+            progressionContainer.innerHTML = '';
+            
+            chordProgression.forEach((chordData, index) => {
+                const chordBox = document.createElement('div');
+                chordBox.className = 'chord-box';
+                chordBox.onclick = () => selectChord(chordData, index);
+                
+                chordBox.innerHTML = `
+                    <div class="chord-position">${index + 1}</div>
+                    <div class="chord-name">${chordData.chord}</div>
+                    <div class="roman-numeral">${chordData.roman}</div>
+                    <div class="chord-type">${chordData.type}</div>
+                `;
+                
+                progressionContainer.appendChild(chordBox);
+            });
+        }
+
+        function selectChord(chordData, index) {
+            selectedChord = chordData;
+            
+            // Update chord box selection
+            document.querySelectorAll('.chord-box').forEach((box, i) => {
+                box.classList.toggle('selected', i === index);
+            });
+            
+            // Add to custom progression if not already there
+            addToProgression(chordData);
+            
+            updateDetailPanel(chordData, index);
+        }
+
+        function addToProgression(chordData) {
+            // Check if chord is already in progression
+            const existingIndex = customProgression.findIndex(c => c.chord === chordData.chord);
+            
+            if (existingIndex === -1) {
+                // Add new chord to progression
+                customProgression.push({...chordData, progressionId: Date.now()});
+                updateProgressionDisplay();
+                updateChordBoxStyles();
+            }
+        }
+
+        function removeFromProgression(progressionId) {
+            customProgression = customProgression.filter(chord => chord.progressionId !== progressionId);
+            updateProgressionDisplay();
+            updateChordBoxStyles();
+        }
+
+        function clearProgression() {
+            customProgression = [];
+            updateProgressionDisplay();
+            updateChordBoxStyles();
+        }
+
+        function updateChordBoxStyles() {
+            const progressionChords = new Set(customProgression.map(c => c.chord));
+            
+            document.querySelectorAll('.chord-box').forEach((box, index) => {
+                const chordData = chordProgression[index];
+                if (progressionChords.has(chordData.chord)) {
+                    box.classList.add('in-progression');
+                } else {
+                    box.classList.remove('in-progression');
+                }
+            });
+        }
+
+        function updateProgressionDisplay() {
+            const sequenceContainer = document.getElementById('sequenceChords');
+            const keyboardsContainer = document.getElementById('progressionKeyboards');
+            
+            if (customProgression.length === 0) {
+                sequenceContainer.innerHTML = '';
+                keyboardsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎹</div>
+                        <p>Select chords above to build your progression<br>Each chord will appear here with its piano keyboard</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Update sequence display
+            sequenceContainer.innerHTML = customProgression.map((chord, index) => `
+                <div class="sequence-chord">
+                    ${chord.chord}
+                    <button class="remove-btn" onclick="removeFromProgression(${chord.progressionId})">&times;</button>
+                </div>
+            `).join('');
+
+            // Update keyboards display
+            keyboardsContainer.innerHTML = customProgression.map((chord, index) => {
+                const keyboardItem = document.createElement('div');
+                keyboardItem.className = 'keyboard-item';
+                
+                const header = document.createElement('div');
+                header.className = 'keyboard-header';
+                header.innerHTML = `
+                    <div class="keyboard-chord-name">${index + 1}. ${chord.chord}</div>
+                    <div class="keyboard-chord-info">${chord.roman} - ${chord.type} (${chord.formula})</div>
+                `;
+                
+                const pianoContainer = document.createElement('div');
+                pianoContainer.className = 'piano-container';
+                pianoContainer.appendChild(createPianoKeyboard(chord.leftHand, chord.rightHand));
+                
+                const fingeringInfo = document.createElement('div');
+                fingeringInfo.className = 'fingering-info';
+                fingeringInfo.innerHTML = `
+                    <strong>Left:</strong> ${chord.leftHand.join(' - ')} | <strong>Right:</strong> ${chord.rightHand.join(' - ')}
+                `;
+                
+                keyboardItem.appendChild(header);
+                keyboardItem.appendChild(pianoContainer);
+                keyboardItem.appendChild(fingeringInfo);
+                
+                return keyboardItem.outerHTML;
+            }).join('');
+        }
+
+        function playProgression() {
+            if (customProgression.length === 0) {
+                alert('Please add chords to your progression first!');
+                return;
+            }
+            
+            // Simple visual playback - highlight each chord in sequence
+            const keyboardItems = document.querySelectorAll('.keyboard-item');
+            let currentIndex = 0;
+            
+            function highlightChord() {
+                // Remove previous highlight
+                keyboardItems.forEach(item => item.style.boxShadow = '');
+                
+                if (currentIndex < keyboardItems.length) {
+                    // Highlight current chord
+                    keyboardItems[currentIndex].style.boxShadow = '0 0 20px #f59e0b, 0 0 40px #f59e0b';
+                    keyboardItems[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    currentIndex++;
+                    setTimeout(highlightChord, 1500); // 1.5 second per chord
+                } else {
+                    // Reset highlights
+                    setTimeout(() => {
+                        keyboardItems.forEach(item => item.style.boxShadow = '');
+                    }, 500);
+                }
+            }
+            
+            highlightChord();
+        }
+
+        function updateDetailPanel(chordData, index) {
+            const selectedChordName = document.getElementById('selectedChordName');
+            const chordInfo = document.getElementById('chordInfo');
+            const detailContent = document.getElementById('detailContent');
+            const pianoContainer = document.getElementById('pianoContainer');
+            const fingeringInfo = document.getElementById('fingeringInfo');
+            const chordDetails = document.getElementById('chordDetails');
+            
+            selectedChordName.textContent = chordData.chord;
+            chordInfo.textContent = `Position ${index + 1} - ${chordData.roman} - ${chordData.description}`;
+            
+            detailContent.style.display = 'grid';
+            
+            // Update piano
+            pianoContainer.innerHTML = '';
+            pianoContainer.appendChild(createPianoKeyboard(chordData.leftHand, chordData.rightHand));
+            
+            fingeringInfo.innerHTML = `
+                <strong>Fingering Pattern:</strong> ${chordData.formula}<br>
+                <strong>Left Hand:</strong> ${chordData.leftHand.join(' - ')} | <strong>Right Hand:</strong> ${chordData.rightHand.join(' - ')}
+            `;
+            
+            // Create detailed chord information
+            chordDetails.innerHTML = `
+                <h4>🎵 Complete Chord Analysis: ${chordData.chord}</h4>
+                <div class="chord-info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Position</div>
+                        <div class="info-value">${index + 1} of 8</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Roman Numeral</div>
+                        <div class="info-value">${chordData.roman}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Chord Quality</div>
+                        <div class="info-value">${chordData.type}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Fingering Pattern</div>
+                        <div class="info-value">${chordData.formula}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Short Name</div>
+                        <div class="info-value">${chordData.shortName}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Description</div>
+                        <div class="info-value">${chordData.description}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Left Hand Notes</div>
+                        <div class="info-value">${chordData.leftHand.join(', ')}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Right Hand Notes</div>
+                        <div class="info-value">${chordData.rightHand.join(', ')}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetDetailPanel() {
+            document.getElementById('selectedChordName').textContent = 'Select a chord above';
+            document.getElementById('chordInfo').textContent = 'Click on any chord to see detailed piano fingerings and chord information';
+            document.getElementById('detailContent').style.display = 'none';
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChordProgression();
+            updateProgressionDisplay();
+            
+            // Add touch event listeners for better mobile experience
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Prevent double-tap zoom
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.target.tagName === 'BUTTON') return;
+            
+            switch(event.key) {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                    event.preventDefault();
+                    const chordIndex = parseInt(event.key) - 1;
+                    if (chordIndex < chordProgression.length) {
+                        selectChord(chordProgression[chordIndex], chordIndex);
+                    }
+                    break;
+                case 'Escape':
+                    event.preventDefault();
+                    resetDetailPanel();
+                    document.querySelectorAll('.chord-box').forEach(box => {
+                        box.classList.remove('selected');
+                    });
+                    selectedChord = null;
+                    break;
+                case 'p':
+                case 'P':
+                    if (event.ctrlKey || event.metaKey) {
+                        event.preventDefault();
+                        playProgression();
+                    }
+                    break;
+                case 'c':
+                case 'C':
+                    if (event.ctrlKey || event.metaKey) {
+                        event.preventDefault();
+                        clearProgression();
+                    }
+                    break;
+            }
+        });
+
+        // Window resize handler for responsive adjustments
+        window.addEventListener('resize', function() {
+            // Trigger layout recalculation for piano keyboards
+            const pianoContainers = document.querySelectorAll('.piano-container');
+            pianoContainers.forEach(container => {
+                if (container.children.length > 0) {
+                    const keyboard = container.children[0];
+                    keyboard.style.transform = keyboard.style.transform; // Force repaint
+                }
+            });
+        });
+
+        // Auto-scroll to detail panel when chord is selected on mobile
+        function handleChordSelection(chordData, index) {
+            selectChord(chordData, index);
+            
+            // On mobile devices, scroll to progression section
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    const progressionSection = document.querySelector('.dynamic-progression');
+                    if (progressionSection) {
+                        progressionSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                }, 300);
+            }
+        }
+
+        // Add accessibility improvements
+        function addAccessibilityFeatures() {
+            document.querySelectorAll('.chord-box').forEach((box, index) => {
+                box.setAttribute('role', 'button');
+                box.setAttribute('aria-label', `Select chord ${index + 1}: ${chordProgression[index].chord}`);
+                box.setAttribute('tabindex', '0');
+                
+                // Add keyboard support for chord boxes
+                box.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        }
+
+        // Initialize accessibility features after DOM updates
+        setTimeout(addAccessibilityFeatures, 100);
+
+        // Performance optimizations
+        const debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
+
+        // Debounced resize handler
+        const debouncedResize = debounce(() => {
+            if (selectedChord !== null) {
+                const chordIndex = chordProgression.findIndex(chord => chord.chord === selectedChord.chord);
+                if (chordIndex !== -1) {
+                    updateDetailPanel(selectedChord, chordIndex);
+                }
+            }
+            updateProgressionDisplay();
+        }, 250);
+
+        window.addEventListener('resize', debouncedResize);
+    </script>
+</body>
+</html>
