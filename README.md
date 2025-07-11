@@ -8,7 +8,7 @@
 
 The most advanced interactive worship chord progression application designed for musicians, music educators, and worship teams. Features comprehensive music theory integration, dynamic progression building, and visual piano instruction.
 
-![Worship Chord Chart V17 Preview](https://via.placeholder.com/900x500/667eea/ffffff?text=Worship+Chord+Chart+V17+Preview)
+![Worship Chord Chart V17 Preview](https://johnhhinsoniii.github.io/worship-chord-chart)
 
 ## ✨ Version 17 Features
 
