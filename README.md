@@ -63,7 +63,7 @@ An interactive, responsive web application designed for worship musicians to lea
 ## 🚀 Quick Start
 
 ### Option 1: Use Online (Recommended)
-Visit the live application: **[https://johnhinsoniii.github.io/worship-chord-chart/](https://yourusername.github.io/worship-chord-chart)**
+Visit the live application: **[https://johnhinsoniii.github.io/worship-chord-chart/](https://johnhinsoniii.github.io/worship-chord-chart/)**
 
 ### Option 2: Download and Run Locally
 ```bash
