@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Worship Chord Chart V2 - Dynamic Progression Builder</title>
+    <title>Worship Chord Chart V2 - Keyboard Accompaniment Flow</title>
     <style>
         * {
             margin: 0;
@@ -74,6 +74,74 @@
             text-align: center;
         }
 
+        .scale-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 24px);
+            margin-bottom: clamp(16px, 3vw, 24px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .scale-title {
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .scale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: clamp(8px, 2vw, 12px);
+            margin-bottom: 15px;
+        }
+
+        .scale-note {
+            background: linear-gradient(145deg, #e2e8f0, #f8fafc);
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: clamp(12px, 3vw, 16px);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: clamp(80px, 15vw, 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .scale-note:hover {
+            background: linear-gradient(145deg, #f1f5f9, #e2e8f0);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .scale-number {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            font-weight: 700;
+            color: #f59e0b;
+            margin-bottom: 4px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 12px;
+            padding: 2px 6px;
+        }
+
+        .scale-note-name {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scale-function {
+            font-size: clamp(0.6rem, 1.4vw, 0.8rem);
+            color: #6b7280;
+            font-style: italic;
+        }
+
         .progression-display {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -102,11 +170,19 @@
             .chord-progression {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .scale-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
             .chord-progression {
                 grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .scale-grid {
+                grid-template-columns: repeat(8, 1fr);
             }
         }
 
@@ -114,10 +190,18 @@
             .chord-progression {
                 grid-template-columns: repeat(8, 1fr);
             }
+            
+            .scale-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
         }
 
         @media (min-width: 1025px) {
             .chord-progression {
+                grid-template-columns: repeat(8, 1fr);
+            }
+            
+            .scale-grid {
                 grid-template-columns: repeat(8, 1fr);
             }
         }
@@ -297,6 +381,10 @@
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
 
         .sequence-chord:hover {
@@ -323,6 +411,28 @@
 
         .sequence-chord:hover .remove-btn {
             display: flex;
+        }
+
+        .sequence-roman-circle {
+            width: clamp(32px, 6vw, 40px);
+            height: clamp(32px, 6vw, 40px);
+            background: linear-gradient(145deg, #6366f1, #4f46e5);
+            border: 2px solid #3730a3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: clamp(0.7rem, 1.8vw, 1rem);
+            color: white;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+            margin-bottom: 4px;
+        }
+
+        .sequence-chord-name {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 600;
         }
 
         .progression-keyboards {
@@ -369,7 +479,7 @@
         .piano-keyboard {
             position: relative;
             display: inline-flex;
-            transform: scale(clamp(0.4, 0.8vw, 0.9));
+            transform: scale(clamp(0.35, 0.8vw, 0.8));
             transform-origin: center;
             min-width: 500px;
         }
@@ -465,6 +575,72 @@
             padding: clamp(8px, 2vw, 12px);
             border-radius: 8px;
             border: 2px solid #10b981;
+        }
+
+        .tonic-display {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            color: #1f2937;
+            background: linear-gradient(145deg, #fef3c7, #fde68a);
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #f59e0b;
+            font-weight: 700;
+        }
+
+        .tonic-label {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #92400e;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .tonic-note {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .tonic-function {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .roman-display {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            color: #1f2937;
+            background: linear-gradient(145deg, #e0e7ff, #c7d2fe);
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #6366f1;
+            font-weight: 700;
+        }
+
+        .roman-label {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #4338ca;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .roman-numeral-display {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .roman-analysis {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #6b7280;
+            font-style: italic;
         }
 
         .detail-panel {
@@ -625,15 +801,15 @@
 
         /* Touch device optimizations */
         @media (hover: none) and (pointer: coarse) {
-            .chord-box {
+            .chord-box, .scale-note {
                 min-height: 48px;
             }
 
-            .chord-box:hover {
+            .chord-box:hover, .scale-note:hover {
                 transform: none;
             }
 
-            .chord-box:active {
+            .chord-box:active, .scale-note:active {
                 transform: scale(0.95);
             }
         }
@@ -687,6 +863,14 @@
                 <span class="pattern">5/7</span>
                 <span class="pattern">1</span>
             </div>
+        </div>
+
+        <div class="scale-section">
+            <div class="scale-title">C Major Scale - Foundation Notes</div>
+            <div class="scale-grid" id="scaleGrid"></div>
+            <p style="text-align: center; color: #6b7280; font-size: clamp(0.7rem, 1.8vw, 0.9rem); margin-top: 10px;">
+                The foundation scale for our chord progressions - each number corresponds to the chord positions above
+            </p>
         </div>
 
         <div class="progression-display">
@@ -763,6 +947,10 @@
                     <div class="color-box color-green"></div>
                     <span>In Progression</span>
                 </div>
+                <div class="legend-item">
+                    <div class="color-box" style="background: linear-gradient(45deg, #c7d2fe, #e0e7ff);"></div>
+                    <span>Roman Analysis</span>
+                </div>
             </div>
             <p style="margin-top: 15px; font-style: italic; color: #6b7280; text-align: center; font-size: clamp(0.7rem, 1.8vw, 1rem);">
                 Keyboard accompaniment flow for worship music with dynamic progression builder. Build custom chord sequences and see all piano keyboards together.
@@ -771,7 +959,19 @@
     </div>
 
     <script>
-        // Chord progression data based on the requirements table
+        // C Major Scale Data
+        const cMajorScale = [
+            { number: 1, note: 'C', function: 'Tonic (Home)' },
+            { number: 2, note: 'D', function: 'Supertonic' },
+            { number: 3, note: 'E', function: 'Mediant' },
+            { number: 4, note: 'F', function: 'Subdominant' },
+            { number: 5, note: 'G', function: 'Dominant' },
+            { number: 6, note: 'A', function: 'Submediant' },
+            { number: 7, note: 'B', function: 'Leading Tone' },
+            { number: 8, note: 'C', function: 'Octave (Return)' }
+        ];
+
+        // Chord progression data based on the requirements
         const chordProgression = [
             {
                 position: 'I',
@@ -876,6 +1076,50 @@
         let selectedChord = null;
         let customProgression = [];
 
+        // Function to get tonic information for each chord
+        function getTonicInfo(chordData) {
+            // Extract the bass note (tonic) from the chord
+            let bassNote = '';
+            let tonicFunction = '';
+            
+            // Determine bass note from left hand (first note is the bass/tonic)
+            if (chordData.leftHand && chordData.leftHand.length > 0) {
+                bassNote = chordData.leftHand[0].replace('3', ''); // Remove octave number
+            }
+            
+            // Map bass notes to their functions in C Major
+            const tonicFunctions = {
+                'C': 'Tonic (1st degree)',
+                'D': 'Supertonic (2nd degree)', 
+                'E': 'Mediant (3rd degree)',
+                'F': 'Subdominant (4th degree)',
+                'G': 'Dominant (5th degree)',
+                'A': 'Submediant (6th degree)',
+                'B': 'Leading Tone (7th degree)'
+            };
+            
+            tonicFunction = tonicFunctions[bassNote] || 'Tonic function';
+            
+            return { bassNote, tonicFunction };
+        }
+
+        // Function to get Roman numeral analysis for each chord
+        function getRomanAnalysis(chordData) {
+            // Map Roman numerals to their analytical descriptions
+            const romanAnalysis = {
+                'I': 'Tonic - Home chord',
+                'ii': 'Supertonic - Pre-dominant',
+                'I/3': 'Tonic with 3rd in bass',
+                'IV': 'Subdominant - Departure',
+                'V': 'Dominant - Tension to resolve',
+                'vi': 'Submediant - Relative minor',
+                'V/7': 'Dominant with 7th in bass',
+                'viii': 'Octave tonic - Resolution'
+            };
+            
+            return romanAnalysis[chordData.roman] || 'Harmonic function';
+        }
+
         function isBlackKey(keyIndex) {
             const blackKeys = [-11, -9, -6, -4, -2, 1, 3, 6, 8, 10, 13, 15, 18, 20, 22];
             return blackKeys.includes(keyIndex);
@@ -964,6 +1208,25 @@
             keyboard.appendChild(blackKeysContainer);
             
             return keyboard;
+        }
+
+        function initializeScaleDisplay() {
+            const scaleContainer = document.getElementById('scaleGrid');
+            
+            scaleContainer.innerHTML = '';
+            
+            cMajorScale.forEach((scaleNote, index) => {
+                const scaleBox = document.createElement('div');
+                scaleBox.className = 'scale-note';
+                
+                scaleBox.innerHTML = `
+                    <div class="scale-number">${scaleNote.number}</div>
+                    <div class="scale-note-name">${scaleNote.note}</div>
+                    <div class="scale-function">${scaleNote.function}</div>
+                `;
+                
+                scaleContainer.appendChild(scaleBox);
+            });
         }
 
         function initializeChordProgression() {
@@ -1056,13 +1319,17 @@
             // Update sequence display
             sequenceContainer.innerHTML = customProgression.map((chord, index) => `
                 <div class="sequence-chord">
-                    ${chord.chord}
+                    <div class="sequence-roman-circle">${chord.roman}</div>
+                    <div class="sequence-chord-name">${chord.chord}</div>
                     <button class="remove-btn" onclick="removeFromProgression(${chord.progressionId})">&times;</button>
                 </div>
             `).join('');
 
             // Update keyboards display
             keyboardsContainer.innerHTML = customProgression.map((chord, index) => {
+                const tonicInfo = getTonicInfo(chord);
+                const romanAnalysis = getRomanAnalysis(chord);
+                
                 const keyboardItem = document.createElement('div');
                 keyboardItem.className = 'keyboard-item';
                 
@@ -1083,9 +1350,27 @@
                     <strong>Left:</strong> ${chord.leftHand.join(' - ')} | <strong>Right:</strong> ${chord.rightHand.join(' - ')}
                 `;
                 
+                const romanDisplay = document.createElement('div');
+                romanDisplay.className = 'roman-display';
+                romanDisplay.innerHTML = `
+                    <div class="roman-label">Roman Numeral Analysis</div>
+                    <div class="roman-numeral-display">${chord.roman}</div>
+                    <div class="roman-analysis">${romanAnalysis}</div>
+                `;
+                
+                const tonicDisplay = document.createElement('div');
+                tonicDisplay.className = 'tonic-display';
+                tonicDisplay.innerHTML = `
+                    <div class="tonic-label">Selected Tonic</div>
+                    <div class="tonic-note">${tonicInfo.bassNote}</div>
+                    <div class="tonic-function">${tonicInfo.tonicFunction}</div>
+                `;
+                
                 keyboardItem.appendChild(header);
                 keyboardItem.appendChild(pianoContainer);
                 keyboardItem.appendChild(fingeringInfo);
+                keyboardItem.appendChild(romanDisplay);
+                keyboardItem.appendChild(tonicDisplay);
                 
                 return keyboardItem.outerHTML;
             }).join('');
@@ -1140,9 +1425,43 @@
             pianoContainer.innerHTML = '';
             pianoContainer.appendChild(createPianoKeyboard(chordData.leftHand, chordData.rightHand));
             
+            // Get tonic info and Roman analysis for this chord
+            const tonicInfo = getTonicInfo(chordData);
+            const romanAnalysis = getRomanAnalysis(chordData);
+            
             fingeringInfo.innerHTML = `
                 <strong>Fingering Pattern:</strong> ${chordData.formula}<br>
                 <strong>Left Hand:</strong> ${chordData.leftHand.join(' - ')} | <strong>Right Hand:</strong> ${chordData.rightHand.join(' - ')}
+            `;
+            
+            // Add Roman numeral display to detail panel
+            let romanDisplay = document.getElementById('detailRomanDisplay');
+            if (!romanDisplay) {
+                romanDisplay = document.createElement('div');
+                romanDisplay.id = 'detailRomanDisplay';
+                romanDisplay.className = 'roman-display';
+                fingeringInfo.parentNode.insertBefore(romanDisplay, fingeringInfo.nextSibling);
+            }
+            
+            romanDisplay.innerHTML = `
+                <div class="roman-label">Roman Numeral Analysis</div>
+                <div class="roman-numeral-display">${chordData.roman}</div>
+                <div class="roman-analysis">${romanAnalysis}</div>
+            `;
+            
+            // Add tonic display to detail panel
+            let tonicDisplay = document.getElementById('detailTonicDisplay');
+            if (!tonicDisplay) {
+                tonicDisplay = document.createElement('div');
+                tonicDisplay.id = 'detailTonicDisplay';
+                tonicDisplay.className = 'tonic-display';
+                romanDisplay.parentNode.insertBefore(tonicDisplay, romanDisplay.nextSibling);
+            }
+            
+            tonicDisplay.innerHTML = `
+                <div class="tonic-label">Selected Tonic</div>
+                <div class="tonic-note">${tonicInfo.bassNote}</div>
+                <div class="tonic-function">${tonicInfo.tonicFunction}</div>
             `;
             
             // Create detailed chord information
@@ -1158,6 +1477,10 @@
                         <div class="info-value">${chordData.roman}</div>
                     </div>
                     <div class="info-item">
+                        <div class="info-label">Harmonic Function</div>
+                        <div class="info-value">${romanAnalysis}</div>
+                    </div>
+                    <div class="info-item">
                         <div class="info-label">Chord Quality</div>
                         <div class="info-value">${chordData.type}</div>
                     </div>
@@ -1166,12 +1489,12 @@
                         <div class="info-value">${chordData.formula}</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Short Name</div>
-                        <div class="info-value">${chordData.shortName}</div>
+                        <div class="info-label">Bass Note (Tonic)</div>
+                        <div class="info-value">${tonicInfo.bassNote}</div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Description</div>
-                        <div class="info-value">${chordData.description}</div>
+                        <div class="info-label">Tonic Function</div>
+                        <div class="info-value">${tonicInfo.tonicFunction}</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Left Hand Notes</div>
@@ -1193,6 +1516,7 @@
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            initializeScaleDisplay();
             initializeChordProgression();
             updateProgressionDisplay();
             
@@ -1298,6 +1622,12 @@
                         this.click();
                     }
                 });
+            });
+            
+            document.querySelectorAll('.scale-note').forEach((box, index) => {
+                box.setAttribute('role', 'button');
+                box.setAttribute('aria-label', `Scale note ${index + 1}: ${cMajorScale[index].note}`);
+                box.setAttribute('tabindex', '0');
             });
         }
 
