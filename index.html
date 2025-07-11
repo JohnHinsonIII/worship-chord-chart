@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Worship Chord Chart V2 - Keyboard Accompaniment Flow</title>
+    <title>Keyboard Accompaniment Flow #1 - Worship Chord Chart V17</title>
     <style>
         * {
             margin: 0;
@@ -52,6 +52,51 @@
             margin-bottom: 15px;
         }
 
+        .key-selector-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .key-label {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .key-selector {
+            background: linear-gradient(145deg, #f59e0b, #d97706);
+            color: white;
+            border: 2px solid #b45309;
+            border-radius: 8px;
+            padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            outline: none;
+        }
+
+        .key-selector:hover {
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .key-selector:focus {
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+        }
+
+        .key-selector option {
+            background: white;
+            color: #1f2937;
+            padding: 8px;
+        }
+
         .pattern-row {
             display: flex;
             justify-content: center;
@@ -93,9 +138,27 @@
 
         .scale-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: clamp(8px, 2vw, 12px);
             margin-bottom: 15px;
+        }
+
+        /* Responsive grid layouts */
+        @media (max-width: 480px) {
+            .scale-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .scale-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .scale-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
         }
 
         .scale-note {
@@ -165,14 +228,10 @@
             margin-bottom: 20px;
         }
 
-        /* Responsive grid layouts */
+        /* Responsive chord grid layouts */
         @media (max-width: 480px) {
             .chord-progression {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .scale-grid {
-                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -180,28 +239,16 @@
             .chord-progression {
                 grid-template-columns: repeat(4, 1fr);
             }
-            
-            .scale-grid {
-                grid-template-columns: repeat(8, 1fr);
-            }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
             .chord-progression {
                 grid-template-columns: repeat(8, 1fr);
             }
-            
-            .scale-grid {
-                grid-template-columns: repeat(8, 1fr);
-            }
         }
 
         @media (min-width: 1025px) {
             .chord-progression {
-                grid-template-columns: repeat(8, 1fr);
-            }
-            
-            .scale-grid {
                 grid-template-columns: repeat(8, 1fr);
             }
         }
@@ -220,7 +267,6 @@
             flex-direction: column;
             justify-content: center;
             color: white;
-            min-height: 44px;
         }
 
         .chord-box:hover {
@@ -479,9 +525,26 @@
         .piano-keyboard {
             position: relative;
             display: inline-flex;
-            transform: scale(clamp(0.35, 0.8vw, 0.8));
             transform-origin: center;
             min-width: 500px;
+        }
+
+        @media (max-width: 480px) {
+            .piano-keyboard {
+                transform: scale(0.35);
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .piano-keyboard {
+                transform: scale(0.5);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .piano-keyboard {
+                transform: scale(0.8);
+            }
         }
 
         .white-keys {
@@ -577,39 +640,6 @@
             border: 2px solid #10b981;
         }
 
-        .tonic-display {
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            font-size: clamp(0.8rem, 2vw, 1.1rem);
-            color: #1f2937;
-            background: linear-gradient(145deg, #fef3c7, #fde68a);
-            padding: clamp(8px, 2vw, 12px);
-            border-radius: 8px;
-            margin-top: 10px;
-            border: 2px solid #f59e0b;
-            font-weight: 700;
-        }
-
-        .tonic-label {
-            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-            color: #92400e;
-            margin-bottom: 4px;
-            font-weight: 600;
-        }
-
-        .tonic-note {
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            color: #1f2937;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .tonic-function {
-            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-            color: #6b7280;
-            font-style: italic;
-        }
-
         .roman-display {
             text-align: center;
             font-family: 'Courier New', monospace;
@@ -638,6 +668,39 @@
         }
 
         .roman-analysis {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .tonic-display {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            color: #1f2937;
+            background: linear-gradient(145deg, #fef3c7, #fde68a);
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #f59e0b;
+            font-weight: 700;
+        }
+
+        .tonic-label {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #92400e;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .tonic-note {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .tonic-function {
             font-size: clamp(0.6rem, 1.5vw, 0.8rem);
             color: #6b7280;
             font-style: italic;
@@ -813,39 +876,6 @@
                 transform: scale(0.95);
             }
         }
-
-        /* Mobile optimizations */
-        @media (max-width: 480px) {
-            .pattern-row {
-                gap: 4px;
-            }
-
-            .pattern {
-                padding: 4px 8px;
-                min-width: 35px;
-            }
-
-            .piano-keyboard {
-                transform: scale(0.35);
-                min-width: 400px;
-            }
-
-            .progression-keyboards {
-                gap: 12px;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 768px) {
-            .piano-keyboard {
-                transform: scale(0.5);
-            }
-        }
-
-        @media (min-width: 1025px) {
-            .piano-keyboard {
-                transform: scale(0.8);
-            }
-        }
     </style>
 </head>
 <body>
@@ -853,6 +883,25 @@
         <div class="header">
             <h1 class="title">Keyboard Accompaniment Flow #1</h1>
             <p class="subtitle">Worship Music Chord Progressions - Dynamic Builder</p>
+            
+            <div class="key-selector-container">
+                <label for="keySelector" class="key-label">Select Key:</label>
+                <select id="keySelector" class="key-selector" onchange="changeKey(this.value)">
+                    <option value="C">C Major</option>
+                    <option value="C#/Db">C# / Db Major</option>
+                    <option value="D">D Major</option>
+                    <option value="D#/Eb">D# / Eb Major</option>
+                    <option value="E">E Major</option>
+                    <option value="F">F Major</option>
+                    <option value="F#/Gb">F# / Gb Major</option>
+                    <option value="G">G Major</option>
+                    <option value="G#/Ab">G# / Ab Major</option>
+                    <option value="A">A Major</option>
+                    <option value="A#/Bb">A# / Bb Major</option>
+                    <option value="B">B Major</option>
+                </select>
+            </div>
+            
             <div class="pattern-row">
                 <span class="pattern">1</span>
                 <span class="pattern">2m</span>
@@ -866,7 +915,7 @@
         </div>
 
         <div class="scale-section">
-            <div class="scale-title">C Major Scale - Foundation Notes</div>
+            <div class="scale-title" id="scaleTitle">C Major Scale - Foundation Notes</div>
             <div class="scale-grid" id="scaleGrid"></div>
             <p style="text-align: center; color: #6b7280; font-size: clamp(0.7rem, 1.8vw, 0.9rem); margin-top: 10px;">
                 The foundation scale for our chord progressions - each number corresponds to the chord positions above
@@ -874,7 +923,7 @@
         </div>
 
         <div class="progression-display">
-            <div class="current-key">C Major - 8 Position Chord Progression</div>
+            <div class="current-key" id="currentKey">C Major - 8 Position Chord Progression</div>
             <div class="chord-progression" id="chordProgression"></div>
         </div>
 
@@ -953,31 +1002,50 @@
                 </div>
             </div>
             <p style="margin-top: 15px; font-style: italic; color: #6b7280; text-align: center; font-size: clamp(0.7rem, 1.8vw, 1rem);">
-                Keyboard accompaniment flow for worship music with dynamic progression builder. Build custom chord sequences and see all piano keyboards together.
+                Keyboard accompaniment flow for worship music with dynamic progression builder. Build custom chord sequences and see all piano keyboards together.<br>
+                <strong>Keyboard Shortcuts:</strong> Numbers 1-8 (select chords), Ctrl+P (play), Ctrl+C (clear), Ctrl+F1-F12 (change keys)
             </p>
         </div>
     </div>
 
     <script>
-        // C Major Scale Data
-        const cMajorScale = [
-            { number: 1, note: 'C', function: 'Tonic (Home)' },
-            { number: 2, note: 'D', function: 'Supertonic' },
-            { number: 3, note: 'E', function: 'Mediant' },
-            { number: 4, note: 'F', function: 'Subdominant' },
-            { number: 5, note: 'G', function: 'Dominant' },
-            { number: 6, note: 'A', function: 'Submediant' },
-            { number: 7, note: 'B', function: 'Leading Tone' },
-            { number: 8, note: 'C', function: 'Octave (Return)' }
+        // Current selected key
+        let currentKey = 'C';
+        
+        // Key intervals for transposition
+        const keyIntervals = {
+            'C': 0, 'C#/Db': 1, 'D': 2, 'D#/Eb': 3, 'E': 4, 'F': 5,
+            'F#/Gb': 6, 'G': 7, 'G#/Ab': 8, 'A': 9, 'A#/Bb': 10, 'B': 11
+        };
+
+        // Note names for all 12 keys
+        const keyNotes = {
+            'C': ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'],
+            'C#/Db': ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C', 'C#'],
+            'D': ['D', 'E', 'F#', 'G', 'A', 'B', 'C#', 'D'],
+            'D#/Eb': ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D', 'Eb'],
+            'E': ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#', 'E'],
+            'F': ['F', 'G', 'A', 'Bb', 'C', 'D', 'E', 'F'],
+            'F#/Gb': ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'F', 'F#'],
+            'G': ['G', 'A', 'B', 'C', 'D', 'E', 'F#', 'G'],
+            'G#/Ab': ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G', 'Ab'],
+            'A': ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#', 'A'],
+            'A#/Bb': ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A', 'Bb'],
+            'B': ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#', 'B']
+        };
+
+        // Scale functions remain the same for all keys
+        const scaleFunctions = [
+            'Tonic (Home)', 'Supertonic', 'Mediant', 'Subdominant',
+            'Dominant', 'Submediant', 'Leading Tone', 'Octave (Return)'
         ];
 
-        // Chord progression data based on the requirements
-        const chordProgression = [
+        // Master chord progression template (will be transposed)
+        const chordProgressionTemplate = [
             {
                 position: 'I',
                 chord: 'C',
                 roman: 'I',
-                shortName: 'C',
                 type: 'Major',
                 formula: '1.3.5',
                 leftHand: ['C3'],
@@ -988,7 +1056,6 @@
                 position: 'ii',
                 chord: 'C4/D',
                 roman: 'ii',
-                shortName: 'C4/D',
                 type: 'Minor11',
                 formula: '1.4.5',
                 leftHand: ['D3'],
@@ -999,7 +1066,6 @@
                 position: 'iii',
                 chord: 'C/E',
                 roman: 'I/3',
-                shortName: 'C/E',
                 type: 'Major',
                 formula: '1.3.5',
                 leftHand: ['E3'],
@@ -1010,7 +1076,6 @@
                 position: 'IV',
                 chord: 'C4/F',
                 roman: 'IV',
-                shortName: 'C4/F',
                 type: 'SUS2',
                 formula: '1.4.5',
                 leftHand: ['F3'],
@@ -1021,7 +1086,6 @@
                 position: 'V',
                 chord: 'C2/G',
                 roman: 'V',
-                shortName: 'C2/G',
                 type: 'SUS4',
                 formula: '1.2.5',
                 leftHand: ['G3'],
@@ -1032,7 +1096,6 @@
                 position: 'vi',
                 chord: 'C/Am',
                 roman: 'vi',
-                shortName: 'C/Am',
                 type: 'Minor7',
                 formula: '1.3.5',
                 leftHand: ['A3'],
@@ -1043,7 +1106,6 @@
                 position: 'VII',
                 chord: 'G/B',
                 roman: 'V/7',
-                shortName: 'G/B',
                 type: 'Add11/7th',
                 formula: '1.2.5',
                 leftHand: ['B3'],
@@ -1054,7 +1116,6 @@
                 position: 'VIII',
                 chord: 'C',
                 roman: 'I',
-                shortName: 'C',
                 type: 'Major',
                 formula: '1.3.5',
                 leftHand: ['C3'],
@@ -1063,7 +1124,23 @@
             }
         ];
 
-        // Note to piano key mapping (C4 = middle C = key index 0)
+        // Transposed chord progression (will be updated when key changes)
+        let chordProgression = [...chordProgressionTemplate];
+
+        // Create current scale data
+        function createScaleData(key) {
+            const notes = keyNotes[key];
+            return notes.map((note, index) => ({
+                number: index + 1,
+                note: note,
+                function: scaleFunctions[index]
+            }));
+        }
+
+        // Current scale data
+        let currentScaleData = createScaleData(currentKey);
+
+        // Note to piano key mapping (C3 to C6 range)
         const noteToKey = {
             'C3': -12, 'C#3': -11, 'Db3': -11, 'D3': -10, 'D#3': -9, 'Eb3': -9, 'E3': -8, 'F3': -7, 'F#3': -6, 'Gb3': -6,
             'G3': -5, 'G#3': -4, 'Ab3': -4, 'A3': -3, 'A#3': -2, 'Bb3': -2, 'B3': -1,
@@ -1076,36 +1153,135 @@
         let selectedChord = null;
         let customProgression = [];
 
-        // Function to get tonic information for each chord
-        function getTonicInfo(chordData) {
-            // Extract the bass note (tonic) from the chord
-            let bassNote = '';
-            let tonicFunction = '';
-            
-            // Determine bass note from left hand (first note is the bass/tonic)
-            if (chordData.leftHand && chordData.leftHand.length > 0) {
-                bassNote = chordData.leftHand[0].replace('3', ''); // Remove octave number
-            }
-            
-            // Map bass notes to their functions in C Major
-            const tonicFunctions = {
-                'C': 'Tonic (1st degree)',
-                'D': 'Supertonic (2nd degree)', 
-                'E': 'Mediant (3rd degree)',
-                'F': 'Subdominant (4th degree)',
-                'G': 'Dominant (5th degree)',
-                'A': 'Submediant (6th degree)',
-                'B': 'Leading Tone (7th degree)'
+        // Fixed chord name mapping for proper transposition
+        const chordNameMappings = {
+            'C': { 0: 'C', 1: 'C#', 2: 'D', 3: 'Eb', 4: 'E', 5: 'F', 6: 'F#', 7: 'G', 8: 'Ab', 9: 'A', 10: 'Bb', 11: 'B' },
+            'C4/D': { 0: 'C4/D', 1: 'C#4/D#', 2: 'D4/E', 3: 'Eb4/F', 4: 'E4/F#', 5: 'F4/G', 6: 'F#4/G#', 7: 'G4/A', 8: 'Ab4/Bb', 9: 'A4/B', 10: 'Bb4/C', 11: 'B4/C#' },
+            'C/E': { 0: 'C/E', 1: 'C#/F', 2: 'D/F#', 3: 'Eb/G', 4: 'E/G#', 5: 'F/A', 6: 'F#/A#', 7: 'G/B', 8: 'Ab/C', 9: 'A/C#', 10: 'Bb/D', 11: 'B/D#' },
+            'C4/F': { 0: 'C4/F', 1: 'C#4/F#', 2: 'D4/G', 3: 'Eb4/Ab', 4: 'E4/A', 5: 'F4/Bb', 6: 'F#4/B', 7: 'G4/C', 8: 'Ab4/Db', 9: 'A4/D', 10: 'Bb4/Eb', 11: 'B4/E' },
+            'C2/G': { 0: 'C2/G', 1: 'C#2/G#', 2: 'D2/A', 3: 'Eb2/Bb', 4: 'E2/B', 5: 'F2/C', 6: 'F#2/C#', 7: 'G2/D', 8: 'Ab2/Eb', 9: 'A2/E', 10: 'Bb2/F', 11: 'B2/F#' },
+            'C/Am': { 0: 'C/Am', 1: 'C#/A#m', 2: 'D/Bm', 3: 'Eb/Cm', 4: 'E/C#m', 5: 'F/Dm', 6: 'F#/D#m', 7: 'G/Em', 8: 'Ab/Fm', 9: 'A/F#m', 10: 'Bb/Gm', 11: 'B/G#m' },
+            'G/B': { 0: 'G/B', 1: 'G#/C', 2: 'A/C#', 3: 'Bb/D', 4: 'B/D#', 5: 'C/E', 6: 'C#/F', 7: 'D/F#', 8: 'Eb/G', 9: 'E/G#', 10: 'F/A', 11: 'F#/A#' }
+        };
+
+        // Transpose a note by semitones
+        function transposeNote(note, semitones) {
+            const noteMap = {
+                'C': 0, 'C#': 1, 'Db': 1, 'D': 2, 'D#': 3, 'Eb': 3, 'E': 4, 'F': 5, 'F#': 6, 'Gb': 6,
+                'G': 7, 'G#': 8, 'Ab': 8, 'A': 9, 'A#': 10, 'Bb': 10, 'B': 11
             };
             
-            tonicFunction = tonicFunctions[bassNote] || 'Tonic function';
+            const reverseMap = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
             
-            return { bassNote, tonicFunction };
+            // Extract note name and octave
+            const noteName = note.replace(/\d/g, '');
+            const octave = note.match(/\d+/);
+            const octaveNum = octave ? parseInt(octave[0]) : 4;
+            
+            // Get semitone value
+            const semitoneValue = noteMap[noteName];
+            if (semitoneValue === undefined) return note;
+            
+            // Transpose
+            let newSemitone = (semitoneValue + semitones) % 12;
+            if (newSemitone < 0) newSemitone += 12;
+            
+            return reverseMap[newSemitone] + octaveNum;
+        }
+
+        // Transpose chord data for new key
+        function transposeChord(chordData, targetKey) {
+            const interval = keyIntervals[targetKey];
+            
+            // Transpose notes
+            const transposedLeftHand = chordData.leftHand.map(note => transposeNote(note, interval));
+            const transposedRightHand = chordData.rightHand.map(note => transposeNote(note, interval));
+            
+            // Get transposed chord name from mapping
+            let newChordName = chordData.chord;
+            if (chordNameMappings[chordData.chord]) {
+                newChordName = chordNameMappings[chordData.chord][interval];
+            }
+            
+            return {
+                ...chordData,
+                chord: newChordName,
+                leftHand: transposedLeftHand,
+                rightHand: transposedRightHand
+            };
+        }
+
+        // Change key function
+        function changeKey(newKey) {
+            currentKey = newKey;
+            
+            // Update scale data
+            currentScaleData = createScaleData(newKey);
+            
+            // Transpose chord progression
+            chordProgression = chordProgressionTemplate.map(chord => transposeChord(chord, newKey));
+            
+            // Transpose custom progression
+            customProgression = customProgression.map(chord => {
+                const originalChord = chordProgressionTemplate.find(template => template.roman === chord.roman);
+                if (originalChord) {
+                    const transposed = transposeChord(originalChord, newKey);
+                    return { ...transposed, progressionId: chord.progressionId };
+                }
+                return chord;
+            });
+            
+            // Update displays
+            document.getElementById('scaleTitle').textContent = `${newKey} Major Scale - Foundation Notes`;
+            document.getElementById('currentKey').textContent = `${newKey} Major - 8 Position Chord Progression`;
+            
+            // Refresh all displays
+            initializeScaleDisplay();
+            initializeChordProgression();
+            updateProgressionDisplay();
+            updateChordBoxStyles();
+            
+            // Update detail panel if chord is selected
+            if (selectedChord) {
+                const chordIndex = chordProgression.findIndex(chord => chord.roman === selectedChord.roman);
+                if (chordIndex !== -1) {
+                    selectedChord = chordProgression[chordIndex];
+                    updateDetailPanel(selectedChord, chordIndex);
+                }
+            }
+        }
+
+        // Function to get tonic information for each chord
+        function getTonicInfo(chordData) {
+            let bassNote = chordData.leftHand[0].replace('3', '');
+            const keyNotesArray = keyNotes[currentKey];
+            
+            // Find the scale degree of the bass note
+            let scaleDegree = 1;
+            for (let i = 0; i < keyNotesArray.length - 1; i++) {
+                if (keyNotesArray[i] === bassNote || 
+                    (keyNotesArray[i] === 'C#' && bassNote === 'Db') ||
+                    (keyNotesArray[i] === 'D#' && bassNote === 'Eb') ||
+                    (keyNotesArray[i] === 'F#' && bassNote === 'Gb') ||
+                    (keyNotesArray[i] === 'G#' && bassNote === 'Ab') ||
+                    (keyNotesArray[i] === 'A#' && bassNote === 'Bb')) {
+                    scaleDegree = i + 1;
+                    break;
+                }
+            }
+            
+            const degreeNames = ['Tonic (1st degree)', 'Supertonic (2nd degree)', 'Mediant (3rd degree)', 
+                               'Subdominant (4th degree)', 'Dominant (5th degree)', 'Submediant (6th degree)', 
+                               'Leading Tone (7th degree)', 'Octave (8th degree)'];
+            
+            return { 
+                bassNote, 
+                tonicFunction: degreeNames[scaleDegree - 1] || 'Scale degree function' 
+            };
         }
 
         // Function to get Roman numeral analysis for each chord
         function getRomanAnalysis(chordData) {
-            // Map Roman numerals to their analytical descriptions
             const romanAnalysis = {
                 'I': 'Tonic - Home chord',
                 'ii': 'Supertonic - Pre-dominant',
@@ -1113,10 +1289,8 @@
                 'IV': 'Subdominant - Departure',
                 'V': 'Dominant - Tension to resolve',
                 'vi': 'Submediant - Relative minor',
-                'V/7': 'Dominant with 7th in bass',
-                'viii': 'Octave tonic - Resolution'
+                'V/7': 'Dominant with 7th in bass'
             };
-            
             return romanAnalysis[chordData.roman] || 'Harmonic function';
         }
 
@@ -1212,10 +1386,9 @@
 
         function initializeScaleDisplay() {
             const scaleContainer = document.getElementById('scaleGrid');
-            
             scaleContainer.innerHTML = '';
             
-            cMajorScale.forEach((scaleNote, index) => {
+            currentScaleData.forEach((scaleNote, index) => {
                 const scaleBox = document.createElement('div');
                 scaleBox.className = 'scale-note';
                 
@@ -1231,7 +1404,6 @@
 
         function initializeChordProgression() {
             const progressionContainer = document.getElementById('chordProgression');
-            
             progressionContainer.innerHTML = '';
             
             chordProgression.forEach((chordData, index) => {
@@ -1316,7 +1488,7 @@
                 return;
             }
 
-            // Update sequence display
+            // Update sequence display with Roman numeral circles
             sequenceContainer.innerHTML = customProgression.map((chord, index) => `
                 <div class="sequence-chord">
                     <div class="sequence-roman-circle">${chord.roman}</div>
@@ -1325,7 +1497,7 @@
                 </div>
             `).join('');
 
-            // Update keyboards display
+            // Update keyboards display with complete analysis
             keyboardsContainer.innerHTML = customProgression.map((chord, index) => {
                 const tonicInfo = getTonicInfo(chord);
                 const romanAnalysis = getRomanAnalysis(chord);
@@ -1382,7 +1554,7 @@
                 return;
             }
             
-            // Simple visual playback - highlight each chord in sequence
+            // Visual playback - highlight each chord in sequence
             const keyboardItems = document.querySelectorAll('.keyboard-item');
             let currentIndex = 0;
             
@@ -1425,7 +1597,7 @@
             pianoContainer.innerHTML = '';
             pianoContainer.appendChild(createPianoKeyboard(chordData.leftHand, chordData.rightHand));
             
-            // Get tonic info and Roman analysis for this chord
+            // Get analysis info
             const tonicInfo = getTonicInfo(chordData);
             const romanAnalysis = getRomanAnalysis(chordData);
             
@@ -1508,19 +1680,182 @@
             `;
         }
 
-        function resetDetailPanel() {
-            document.getElementById('selectedChordName').textContent = 'Select a chord above';
-            document.getElementById('chordInfo').textContent = 'Click on any chord to see detailed piano fingerings and chord information';
-            document.getElementById('detailContent').style.display = 'none';
-        }
-
-        // Initialize the app
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            // Set default key to C Major
+            document.getElementById('keySelector').value = 'C';
+            
+            // Initialize displays
             initializeScaleDisplay();
             initializeChordProgression();
             updateProgressionDisplay();
             
-            // Add touch event listeners for better mobile experience
+            // Keyboard navigation with key selection shortcuts
+            document.addEventListener('keydown', function(event) {
+                if (event.target.tagName === 'BUTTON' || event.target.tagName === 'SELECT') return;
+                
+                switch(event.key) {
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                        event.preventDefault();
+                        const chordIndex = parseInt(event.key) - 1;
+                        if (chordIndex < chordProgression.length) {
+                            selectChord(chordProgression[chordIndex], chordIndex);
+                        }
+                        break;
+                    case 'Escape':
+                        event.preventDefault();
+                        document.querySelectorAll('.chord-box').forEach(box => {
+                            box.classList.remove('selected');
+                        });
+                        selectedChord = null;
+                        break;
+                    case 'p':
+                    case 'P':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            playProgression();
+                        }
+                        break;
+                    case 'c':
+                    case 'C':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            clearProgression();
+                        }
+                        break;
+                    // Quick key changes with Ctrl+F1-F12
+                    case 'F1':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'C';
+                            changeKey('C');
+                        }
+                        break;
+                    case 'F2':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'C#/Db';
+                            changeKey('C#/Db');
+                        }
+                        break;
+                    case 'F3':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'D';
+                            changeKey('D');
+                        }
+                        break;
+                    case 'F4':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'D#/Eb';
+                            changeKey('D#/Eb');
+                        }
+                        break;
+                    case 'F5':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'E';
+                            changeKey('E');
+                        }
+                        break;
+                    case 'F6':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'F';
+                            changeKey('F');
+                        }
+                        break;
+                    case 'F7':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'F#/Gb';
+                            changeKey('F#/Gb');
+                        }
+                        break;
+                    case 'F8':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'G';
+                            changeKey('G');
+                        }
+                        break;
+                    case 'F9':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'G#/Ab';
+                            changeKey('G#/Ab');
+                        }
+                        break;
+                    case 'F10':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'A';
+                            changeKey('A');
+                        }
+                        break;
+                    case 'F11':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'A#/Bb';
+                            changeKey('A#/Bb');
+                        }
+                        break;
+                    case 'F12':
+                        if (event.ctrlKey || event.metaKey) {
+                            event.preventDefault();
+                            document.getElementById('keySelector').value = 'B';
+                            changeKey('B');
+                        }
+                        break;
+                }
+            });
+
+            // Add accessibility features
+            document.querySelectorAll('.chord-box').forEach((box, index) => {
+                box.setAttribute('role', 'button');
+                box.setAttribute('aria-label', `Select chord ${index + 1}: ${chordProgression[index].chord}`);
+                box.setAttribute('tabindex', '0');
+                
+                box.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.scale-note').forEach((box, index) => {
+                box.setAttribute('role', 'button');
+                box.setAttribute('aria-label', `Scale note ${index + 1}: ${currentScaleData[index].note}`);
+                box.setAttribute('tabindex', '0');
+            });
+
+            // Mobile auto-scroll behavior
+            if (window.innerWidth <= 768) {
+                document.addEventListener('click', function(event) {
+                    if (event.target.closest('.chord-box')) {
+                        setTimeout(() => {
+                            const progressionSection = document.querySelector('.dynamic-progression');
+                            if (progressionSection) {
+                                progressionSection.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'center'
+                                });
+                            }
+                        }, 300);
+                    }
+                });
+            }
+
+            // Touch device optimizations
             document.addEventListener('touchstart', function() {}, {passive: true});
             
             // Prevent double-tap zoom
@@ -1534,107 +1869,7 @@
             }, false);
         });
 
-        // Keyboard navigation
-        document.addEventListener('keydown', function(event) {
-            if (event.target.tagName === 'BUTTON') return;
-            
-            switch(event.key) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                    event.preventDefault();
-                    const chordIndex = parseInt(event.key) - 1;
-                    if (chordIndex < chordProgression.length) {
-                        selectChord(chordProgression[chordIndex], chordIndex);
-                    }
-                    break;
-                case 'Escape':
-                    event.preventDefault();
-                    resetDetailPanel();
-                    document.querySelectorAll('.chord-box').forEach(box => {
-                        box.classList.remove('selected');
-                    });
-                    selectedChord = null;
-                    break;
-                case 'p':
-                case 'P':
-                    if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault();
-                        playProgression();
-                    }
-                    break;
-                case 'c':
-                case 'C':
-                    if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault();
-                        clearProgression();
-                    }
-                    break;
-            }
-        });
-
-        // Window resize handler for responsive adjustments
-        window.addEventListener('resize', function() {
-            // Trigger layout recalculation for piano keyboards
-            const pianoContainers = document.querySelectorAll('.piano-container');
-            pianoContainers.forEach(container => {
-                if (container.children.length > 0) {
-                    const keyboard = container.children[0];
-                    keyboard.style.transform = keyboard.style.transform; // Force repaint
-                }
-            });
-        });
-
-        // Auto-scroll to detail panel when chord is selected on mobile
-        function handleChordSelection(chordData, index) {
-            selectChord(chordData, index);
-            
-            // On mobile devices, scroll to progression section
-            if (window.innerWidth <= 768) {
-                setTimeout(() => {
-                    const progressionSection = document.querySelector('.dynamic-progression');
-                    if (progressionSection) {
-                        progressionSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'center'
-                        });
-                    }
-                }, 300);
-            }
-        }
-
-        // Add accessibility improvements
-        function addAccessibilityFeatures() {
-            document.querySelectorAll('.chord-box').forEach((box, index) => {
-                box.setAttribute('role', 'button');
-                box.setAttribute('aria-label', `Select chord ${index + 1}: ${chordProgression[index].chord}`);
-                box.setAttribute('tabindex', '0');
-                
-                // Add keyboard support for chord boxes
-                box.addEventListener('keydown', function(event) {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        this.click();
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.scale-note').forEach((box, index) => {
-                box.setAttribute('role', 'button');
-                box.setAttribute('aria-label', `Scale note ${index + 1}: ${cMajorScale[index].note}`);
-                box.setAttribute('tabindex', '0');
-            });
-        }
-
-        // Initialize accessibility features after DOM updates
-        setTimeout(addAccessibilityFeatures, 100);
-
-        // Performance optimizations
+        // Performance optimizations with debounced resize handler
         const debounce = (func, wait) => {
             let timeout;
             return function executedFunction(...args) {
@@ -1647,10 +1882,9 @@
             };
         };
 
-        // Debounced resize handler
         const debouncedResize = debounce(() => {
             if (selectedChord !== null) {
-                const chordIndex = chordProgression.findIndex(chord => chord.chord === selectedChord.chord);
+                const chordIndex = chordProgression.findIndex(chord => chord.roman === selectedChord.roman);
                 if (chordIndex !== -1) {
                     updateDetailPanel(selectedChord, chordIndex);
                 }
