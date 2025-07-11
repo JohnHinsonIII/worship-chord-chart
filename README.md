@@ -1,77 +1,81 @@
-# worship-chord-chart
-Developer John H. Hinson III, PhD
-Date: 7/10/2025
-Version 2
+# 🎹 Worship Chord Chart V17 - Advanced Educational Edition
 
-Worship Chord Chart
-# 🎹 Worship Chord Chart - Keyboard Accompaniment Flow #1
-
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge)](https://yourusername.github.io/worship-chord-chart)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge)](https://yourusername.github.io/worship-chord-chart-v17)
+[![Version](https://img.shields.io/badge/Version-17-blue?style=flat-square)](https://github.com/yourusername/worship-chord-chart-v17)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-An interactive, responsive web application designed for worship musicians to learn and practice keyboard accompaniment patterns. Features a dynamic progression builder with visual piano keyboards and color-coded fingering patterns.
+The most advanced interactive worship chord progression application designed for musicians, music educators, and worship teams. Features comprehensive music theory integration, dynamic progression building, and visual piano instruction.
 
-![Worship Chord Chart Preview](https://via.placeholder.com/800x400/667eea/ffffff?text=Worship+Chord+Chart+Preview)
+![Worship Chord Chart V17 Preview](https://via.placeholder.com/900x500/667eea/ffffff?text=Worship+Chord+Chart+V17+Preview)
 
-## ✨ Features
+## ✨ Version 17 Features
 
-### 🎵 **Core Functionality**
-- **8-Position Chord Progression**: Complete 1 - 2m - 1/3 - 4 - 5 - 6m - 5/7 - 1 pattern
-- **Interactive Piano Keyboards**: Visual representation with color-coded hand positions
-- **Dynamic Progression Builder**: Create custom chord sequences with stacked keyboards
-- **Real-time Fingering Display**: Instant visual feedback for left and right hand positions
+### 🎵 **Complete Educational Framework**
+- **C Major Scale Foundation**: Interactive 8-note scale display with harmonic functions
+- **Roman Numeral Analysis**: Color-coded theoretical analysis for each chord
+- **Tonic/Bass Note Integration**: Shows scale degree relationships and voice leading
+- **Progressive Learning Structure**: From scale theory to practical application
 
-### 🎹 **Piano Keyboard Features**
-- **Color-Coded Hand Positions**:
-  - 🔵 Blue: Left hand notes
-  - 🔴 Red: Right hand notes  
-  - 🟣 Purple: Both hands
-- **Note Labels**: Every key shows its note name
-- **Responsive Scaling**: Adapts to screen size (mobile to desktop)
-- **3+ Octave Range**: Complete fingering patterns from C3 to C6
+### 🎹 **Advanced Piano System**
+- **Interactive Keyboards**: Visual representation with color-coded hand positions
+- **Complete Fingering Patterns**: Exact left/right hand positions for all 8 chords
+- **Responsive Scaling**: Adapts perfectly to mobile, tablet, and desktop
+- **3+ Octave Range**: Professional piano layout from C3 to C6
 
-### 🚀 **Dynamic Progression Builder**
-- **Click to Add**: Select any chord to add to your custom progression
-- **Stacked Keyboards**: Each selected chord displays with its own piano keyboard
-- **Visual Sequence**: See your chord progression with numbered sequence
-- **Play Feature**: Highlight progression sequence with timing
-- **Easy Management**: Remove individual chords or clear entire progression
+### 🎼 **Dynamic Progression Builder V17**
+- **Roman Numeral Circles**: Visual progression sequence with theory integration
+- **Stacked Piano Analysis**: Each chord shows complete harmonic breakdown
+- **Multi-Layer Information**: Fingerings → Roman Analysis → Tonic Display
+- **Visual Playback**: Animated progression highlighting with timing
 
-### 📱 **Responsive Design**
-- **Mobile (< 480px)**: 2-column chord grid, touch-optimized controls
-- **Tablet (481-768px)**: 4-column layout with medium elements
-- **Desktop (769-1024px)**: 8-column grid with side-by-side panels
-- **Large Screens (1025px+)**: Expanded layout with optimal spacing
+### 📚 **Music Theory Integration**
+- **Harmonic Function Analysis**: Complete breakdown of chord roles
+- **Voice Leading Visualization**: Bass line movement through scale degrees
+- **Scale-to-Chord Connection**: Links foundation theory to practical chords
+- **Educational Progression**: Theory → Analysis → Practice → Application
 
-## 🎯 Chord Progressions Included
+## 🎯 Complete Chord Analysis System
 
-### Key of C Major - Complete Fingering Patterns
+### C Major Scale Foundation
 
-| Position | Chord | Roman | Type | Formula | Left Hand | Right Hand | Description |
-|----------|-------|-------|------|---------|-----------|------------|-------------|
-| **I** | C | I | Major | 1.3.5 | C3 | C4-E4-G4 | Major triad - tonic |
-| **ii** | C4/D | ii | Minor11 | 1.4.5 | D3 | C4-F4-G4 | Minor with 11th |
-| **I/3** | C/E | I/3 | Major | 1.3.5 | E3 | C4-E4-G4 | Major with 3rd in bass |
-| **IV** | C4/F | IV | SUS2 | 1.4.5 | F3 | C4-F4-G4 | Suspended 2nd |
-| **V** | C2/G | V | SUS4 | 1.2.5 | G3 | C4-D4-G4 | Suspended 4th |
-| **vi** | C/Am | vi | Minor7 | 1.3.5 | A3 | C4-E4-G4 | Minor 7th |
-| **V/7** | G/B | V/7 | Add11/7th | 1.2.5 | B3 | C4-D4-G4 | Add 11th with 7th in bass |
-| **I** | C | I | Major | 1.3.5 | C3 | C4-E4-G4 | Resolution to tonic |
+| Scale Degree | Note | Number | Harmonic Function |
+|--------------|------|--------|-------------------|
+| **Tonic** | C | 1 | Home/Rest - Stability |
+| **Supertonic** | D | 2 | Tension - Pre-dominant |
+| **Mediant** | E | 3 | Stability - Tonic expansion |
+| **Subdominant** | F | 4 | Movement - Departure |
+| **Dominant** | G | 5 | Strong Pull - Resolution driver |
+| **Submediant** | A | 6 | Relative Minor - Emotional depth |
+| **Leading Tone** | B | 7 | Resolution - Pull to tonic |
+| **Octave** | C | 8 | Return Home - Resolution |
 
-## 🚀 Quick Start
+### 8-Position Chord Progression Analysis
+
+| Pos | Chord | Roman | Type | Formula | Left Hand | Right Hand | Harmonic Function | Bass Movement |
+|-----|-------|-------|------|---------|-----------|------------|-------------------|---------------|
+| **1** | C | I | Major | 1.3.5 | C3 | C4-E4-G4 | Tonic - Home | C (1st degree) |
+| **2** | C4/D | ii | Minor11 | 1.4.5 | D3 | C4-F4-G4 | Pre-dominant | D (2nd degree) |
+| **3** | C/E | I/3 | Major | 1.3.5 | E3 | C4-E4-G4 | Tonic/3rd bass | E (3rd degree) |
+| **4** | C4/F | IV | SUS2 | 1.4.5 | F3 | C4-F4-G4 | Subdominant | F (4th degree) |
+| **5** | C2/G | V | SUS4 | 1.2.5 | G3 | C4-D4-G4 | Dominant | G (5th degree) |
+| **6** | C/Am | vi | Minor7 | 1.3.5 | A3 | C4-E4-G4 | Relative minor | A (6th degree) |
+| **7** | G/B | V/7 | Add11/7th | 1.2.5 | B3 | C4-D4-G4 | Dom/7th bass | B (7th degree) |
+| **8** | C | I | Major | 1.3.5 | C3 | C4-E4-G4 | Resolution | C (Octave) |
+
+## 🚀 Quick Start Guide
 
 ### Option 1: Use Online (Recommended)
-Visit the live application: **[https://johnhinsoniii.github.io/worship-chord-chart/](https://johnhinsoniii.github.io/worship-chord-chart/)**
+Visit the live application: **[Worship Chord Chart V17](https://yourusername.github.io/worship-chord-chart-v17)**
 
 ### Option 2: Download and Run Locally
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/worship-chord-chart.git
+git clone https://github.com/yourusername/worship-chord-chart-v17.git
 
 # Navigate to the directory
-cd worship-chord-chart
+cd worship-chord-chart-v17
 
 # Open index.html in your browser
 # Or start a local server:
@@ -79,182 +83,260 @@ python -m http.server 8000
 # Then visit http://localhost:8000
 ```
 
-## 📖 How to Use
+## 📖 How to Use V17
 
-### 1. **Basic Chord Selection**
-- Click any of the 8 chord boxes to view detailed fingering
-- Selected chord appears in dark theme with piano keyboard below
-- View complete chord analysis including formula and hand positions
+### 1. **Learn the Foundation**
+- Start with the **C Major Scale** section to understand scale degrees 1-8
+- Each note shows its harmonic function and relationship to chords
+- See how scale numbers connect to the chord progression pattern
 
-### 2. **Building Custom Progressions**
+### 2. **Explore Individual Chords**
+- Click any of the 8 chord boxes to view detailed analysis
+- See exact piano fingerings with color-coded hand positions
+- Study Roman numeral analysis and harmonic function
+- Understand bass note relationships to scale degrees
+
+### 3. **Build Custom Progressions**
 - Click chord boxes to add them to your custom progression
-- Chords turn green when added to progression
-- Each chord appears with its own piano keyboard in the progression section
-- Remove chords by clicking the ❌ button on progression chips
+- Watch **Roman numeral circles** appear in the sequence
+- Each chord displays with complete analysis:
+  - Interactive piano keyboard
+  - Fingering information
+  - Roman numeral analysis box
+  - Tonic/bass note display
 
-### 3. **Playing Your Progression**
-- Use the **▶️ Play Sequence** button to highlight each chord in order
-- Each chord is highlighted for 1.5 seconds with visual effects
-- Auto-scroll keeps the current chord in view
+### 4. **Advanced Features**
+- **Play Sequence**: Visual progression playback with highlighting
+- **Harmonic Analysis**: Complete theoretical breakdown
+- **Voice Leading**: See bass line movement through scale degrees
+- **Progressive Learning**: Theory connects to practical application
 
-### 4. **Keyboard Shortcuts**
+### 5. **Keyboard Shortcuts**
 - **Numbers 1-8**: Quick select specific chords
 - **Escape**: Deselect current chord
 - **Ctrl/Cmd + P**: Play progression sequence
 - **Ctrl/Cmd + C**: Clear entire progression
 
-## 🎨 Design Features
+## 🎨 V17 Visual Design System
 
-### **Visual Design System**
-- **Glass Morphism**: Modern frosted glass effect with backdrop blur
-- **Gradient Backgrounds**: Purple-to-blue atmospheric gradient
-- **Smooth Animations**: Hover effects and transitions throughout
-- **Color Psychology**: Intuitive color coding for different functions
+### **Color-Coded Learning Framework**
+- **🟠 Orange**: Default chords and selected elements
+- **🟢 Green**: Chords in custom progression
+- **⚫ Dark**: Currently selected chord for analysis
+- **🔵 Blue**: Left hand piano keys and Roman analysis boxes
+- **🔴 Red**: Right hand piano keys
+- **🟣 Purple**: Both hands and Roman numeral circles
+- **🟡 Golden**: Tonic/bass note information
 
-### **Accessibility Features**
-- **ARIA Labels**: Screen reader compatible
-- **Keyboard Navigation**: Full keyboard control support
-- **Touch Optimized**: 44px minimum touch targets
-- **High Contrast**: Clear visual hierarchy and readability
+### **Responsive Design Excellence**
+| Device Type | Chord Grid | Scale Grid | Piano Scale | Features |
+|-------------|------------|------------|-------------|----------|
+| **📱 Mobile** | 2 columns | 4 columns | 0.35x | Touch-optimized, auto-scroll |
+| **📲 Tablet** | 4 columns | 8 columns | 0.5x | Medium elements, gestures |
+| **💻 Desktop** | 8 columns | 8 columns | 0.8x | Side panels, hover effects |
+| **🖥️ Large** | 8 columns | 8 columns | 0.8x | Optimal spacing, full features |
 
-## 🔧 Technical Details
+## 🎓 Educational Applications
 
-### **Technologies Used**
-- **HTML5**: Semantic structure and modern web standards
-- **CSS3**: Grid, Flexbox, Custom Properties, clamp() functions
-- **Vanilla JavaScript**: No external dependencies
-- **Responsive Design**: Mobile-first approach with breakpoints
+### **For Worship Musicians**
+- **Chord Mastery**: Learn proper fingering for all 8 positions
+- **Harmonic Understanding**: Why progressions "work" harmonically
+- **Bass Line Skills**: Understand voice leading and bass movement
+- **Theory Integration**: Connect classroom theory to worship practice
 
-### **Key Technical Features**
-```javascript
-// Core functionality includes:
-- Dynamic DOM manipulation for progression building
-- Responsive piano keyboard generation
-- State management for multiple chord selections
-- Touch and keyboard event handling
-- Debounced resize handlers for performance
-- CSS Grid and Flexbox for responsive layouts
-```
+### **For Music Educators**
+- **Visual Teaching Tool**: Show students exact finger positions and theory
+- **Progressive Curriculum**: Scale → Chords → Progressions → Analysis
+- **Interactive Learning**: Hands-on exploration of harmonic concepts
+- **Assessment Tool**: Students can demonstrate understanding practically
+
+### **For Music Students**
+- **Theory-Practice Bridge**: See how Roman numerals connect to real music
+- **Muscle Memory Development**: Repetitive visual and kinesthetic learning
+- **Pattern Recognition**: Understand common progression structures
+- **Harmonic Ear Training**: Connect visual patterns to sound
+
+## 🔧 Technical Specifications
+
+### **Advanced Architecture**
+- **Single File Application**: Complete functionality in one HTML file
+- **No External Dependencies**: Works completely offline
+- **Modern Web Standards**: ES6+, CSS Grid, Flexbox, Custom Properties
+- **Performance Optimized**: Debounced events, efficient DOM updates
 
 ### **Browser Compatibility**
-- ✅ Chrome 88+
+- ✅ Chrome 88+ (Recommended)
 - ✅ Firefox 85+
 - ✅ Safari 14+
 - ✅ Edge 88+
 - ✅ Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 📱 Device Compatibility
+### **Key Technical Features**
+```javascript
+// Core V17 functionality includes:
+- Advanced harmonic analysis system
+- Multi-layer educational displays
+- Responsive piano keyboard generation
+- Roman numeral progression visualization
+- State management for complex interactions
+- Touch and keyboard event optimization
+```
 
-| Device Type | Layout | Features |
-|-------------|--------|----------|
-| **📱 Mobile** | 2-column grid | Touch-optimized, auto-scroll |
-| **📲 Tablet** | 4-column grid | Medium elements, gesture support |
-| **💻 Desktop** | 8-column grid | Side-by-side panels, hover effects |
-| **🖥️ Large Screen** | Expanded layout | Optimal spacing, full features |
+## 🆕 What's New in Version 17
 
-## 🎵 Educational Value
+### **Major Enhancements**
+- **🎼 Roman Numeral Circles**: Visual progression sequence with theory integration
+- **📊 Tonic Analysis System**: Complete bass note and scale degree analysis
+- **🎹 Enhanced Piano Displays**: Multi-layer information architecture
+- **📚 Educational Framework**: Progressive learning from theory to practice
+- **🎨 Advanced Visual Design**: Color-coded learning with professional styling
 
-### **For Worship Musicians**
-- **Learn Proper Fingering**: Visual guide for keyboard accompaniment
-- **Understand Chord Function**: Roman numeral analysis and chord relationships
-- **Practice Progressions**: Build and practice custom chord sequences
-- **Muscle Memory**: Repetitive visual and kinesthetic learning
+### **Educational Improvements**
+- **Complete Harmonic Analysis**: Every chord shows full theoretical context
+- **Voice Leading Visualization**: Bass movement through scale degrees
+- **Progressive Learning Structure**: Logical flow from foundation to application
+- **Multi-Intelligence Engagement**: Visual, auditory, kinesthetic, and logical learning
 
-### **For Music Teachers**
-- **Visual Teaching Tool**: Show students exact finger positions
-- **Progression Analysis**: Demonstrate chord function and relationships
-- **Interactive Learning**: Engage students with hands-on exploration
-- **Flexible Practice**: Create custom exercises for different skill levels
+### **Technical Advances**
+- **Enhanced Responsive Design**: Improved mobile and tablet experiences
+- **Advanced State Management**: Complex interaction handling
+- **Performance Optimizations**: Faster rendering and smoother animations
+- **Accessibility Improvements**: Better screen reader support and keyboard navigation
 
-## 🚧 Future Enhancements
+## 🚧 Future Development Roadmap
 
-### **Planned Features**
-- [ ] **All 12 Keys**: Transpose to any major key
-- [ ] **Audio Playback**: MIDI or audio synthesis for chord sounds
-- [ ] **Bass Guitar Tab**: Visual bass guitar fingering patterns
-- [ ] **Export Options**: Save progressions as MIDI or chord charts
-- [ ] **Additional Patterns**: More accompaniment styles and variations
-- [ ] **Metronome**: Built-in timing for practice
-- [ ] **Recording**: Save and playback custom progressions
-
-### **Advanced Features**
-- [ ] **Minor Key Progressions**: Relative minor and modal patterns
-- [ ] **Jazz Extensions**: 7ths, 9ths, and altered chords
-- [ ] **User Accounts**: Save personal progressions
-- [ ] **Sharing**: Share chord progressions with others
+### **Planned V18+ Features**
+- [ ] **All 12 Keys**: Complete transposition system
+- [ ] **Audio Playback**: MIDI synthesis for chord sounds
+- [ ] **Advanced Progressions**: Minor keys, jazz extensions, modal harmony
+- [ ] **User Accounts**: Save and share custom progressions
+- [ ] **Export Features**: MIDI, PDF chord charts, audio recordings
 - [ ] **Mobile App**: Native iOS/Android applications
 
-## 🤝 Contributing
+### **Educational Enhancements**
+- [ ] **Lesson Plans**: Structured learning modules
+- [ ] **Progress Tracking**: Student advancement monitoring
+- [ ] **Assessment Tools**: Built-in testing and evaluation
+- [ ] **Collaborative Features**: Teacher-student interaction tools
 
-We welcome contributions! Here's how you can help:
+## 🤝 Contributing to V17
+
+We welcome contributions to make this the best worship chord learning tool available!
 
 ### **Ways to Contribute**
-1. **Report Bugs**: Open an issue with detailed bug reports
-2. **Suggest Features**: Share ideas for new functionality
-3. **Improve Documentation**: Help make instructions clearer
-4. **Code Contributions**: Submit pull requests for enhancements
+1. **🐛 Bug Reports**: Found an issue? Open a detailed bug report
+2. **💡 Feature Requests**: Share ideas for educational enhancements
+3. **📖 Documentation**: Help improve instructions and tutorials
+4. **💻 Code Contributions**: Submit pull requests for new features
+5. **🎵 Music Content**: Suggest additional chord progressions or keys
 
 ### **Development Setup**
 ```bash
-# Fork the repository
-git clone https://github.com/yourusername/worship-chord-chart.git
-cd worship-chord-chart
+# Fork and clone the repository
+git clone https://github.com/yourusername/worship-chord-chart-v17.git
+cd worship-chord-chart-v17
 
 # Make your changes to index.html
 # Test locally with a simple server
 python -m http.server 8000
 
-# Submit a pull request with your improvements
+# Submit a pull request with clear description
 ```
+
+### **Contribution Guidelines**
+- Maintain educational focus and accessibility
+- Follow responsive design principles
+- Test across multiple devices and browsers
+- Document any new features thoroughly
+- Respect the progressive learning structure
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### **MIT License Summary**
-- ✅ Commercial use
-- ✅ Modification
-- ✅ Distribution
-- ✅ Private use
-- ❌ No warranty or liability
+### **MIT License Benefits**
+- ✅ **Commercial Use**: Use in commercial worship/education settings
+- ✅ **Modification**: Adapt for your specific needs
+- ✅ **Distribution**: Share with other musicians and educators
+- ✅ **Private Use**: Personal practice and learning
+- ❌ **No Warranty**: Use at your own discretion
 
-## 🙏 Acknowledgments
+## 🙏 Acknowledgments & Credits
 
-- **Worship Musicians**: For inspiring the need for better learning tools
-- **Music Theory**: Based on standard keyboard accompaniment patterns
-- **Web Technologies**: Built with modern web standards
-- **Open Source Community**: For providing the foundation and inspiration
+### **Educational Inspiration**
+- **Worship Musicians Worldwide**: For inspiring better learning tools
+- **Music Educators**: For guidance on effective teaching methods
+- **Music Theory Tradition**: Built on centuries of harmonic understanding
+- **Open Source Community**: For providing the technological foundation
 
-## 📞 Support
+### **Technical Credits**
+- **Modern Web Standards**: HTML5, CSS3, ES6+ JavaScript
+- **Responsive Design**: Mobile-first approach with progressive enhancement
+- **Typography**: System fonts for optimal readability
+- **Color Theory**: Accessibility-focused color palette design
+
+## 📞 Support & Community
 
 ### **Getting Help**
 - 📧 **Email**: [your.email@example.com](mailto:your.email@example.com)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/worship-chord-chart/issues)
-- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/worship-chord-chart/discussions)
-- 📖 **Documentation**: Check this README and code comments
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/worship-chord-chart-v17/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/worship-chord-chart-v17/discussions)
+- 📖 **Documentation**: Check this README and in-code comments
 
-### **FAQ**
+### **Community Guidelines**
+- Be respectful and encouraging to all skill levels
+- Focus on educational value and practical application
+- Share knowledge and help others learn
+- Contribute constructively to discussions and development
 
-**Q: Does this work offline?**
-A: Yes! Once loaded, the application works completely offline.
+### **Frequently Asked Questions**
 
-**Q: Can I use this on mobile devices?**
-A: Absolutely! The app is fully responsive and touch-optimized.
+**Q: Is this suitable for beginners?**
+A: Yes! V17 is designed with progressive learning from basic scale knowledge to advanced harmonic analysis.
+
+**Q: Does this work on mobile devices?**
+A: Absolutely! The responsive design is optimized for touch interfaces and small screens.
+
+**Q: Can I use this for teaching?**
+A: Yes! This is an excellent educational tool for music teachers and worship leaders.
 
 **Q: Are there plans for other keys?**
-A: Yes, support for all 12 major keys is planned for future releases.
+A: Yes, all 12 major keys are planned for future versions.
 
 **Q: Can I contribute chord progressions?**
-A: Yes! We welcome contributions of new patterns and progressions.
+A: Yes! We welcome contributions of new progressions and educational content.
+
+**Q: Does this require internet access?**
+A: No! Once loaded, the application works completely offline.
 
 ---
 
 ## 🌟 Star This Repository
 
-If you find this project helpful, please consider giving it a star ⭐ to help others discover it!
+If you find this educational tool helpful for your worship music or teaching, please consider giving it a ⭐ to help others discover it!
+
+---
+
+## 📊 Version History
+
+- **V17** (Current): Advanced educational edition with Roman analysis and tonic displays
+- **V16**: Enhanced progression builder with visual improvements
+- **V15**: Added scale foundation and educational framework
+- **V14**: Dynamic progression builder implementation
+- **V13**: Responsive design and mobile optimization
+- **V12**: Basic chord progression and piano keyboard system
+- **V11 and earlier**: Foundation development and core features
 
 ---
 
 **Made with ❤️ for the worship music community**
 
-*Empowering musicians with visual learning tools for better worship experiences*
+*Empowering musicians with comprehensive visual learning tools for better worship experiences and deeper musical understanding*
+
+---
+
+### 🎯 **Ready to Transform Your Chord Learning?**
+
+**[🚀 Try Worship Chord Chart V17 Now](https://johnhhinsoniii.github.io/worship-chord-chart)**
+
+Experience the most advanced worship chord learning tool available - completely free and open source!
