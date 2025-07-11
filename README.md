@@ -1,4 +1,8 @@
 # worship-chord-chart
+Developer John H. Hinson III, PhD
+Date: 7/10/2025
+Version 2
+
 Worship Chord Chart
 # 🎹 Worship Chord Chart - Keyboard Accompaniment Flow #1
 
